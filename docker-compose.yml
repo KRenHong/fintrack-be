@@ -1,29 +1,25 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:16
+    restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - db_data:/var/lib/postgresql/data
+
   backend:
     build: .
-    env_file: ./.env
+    restart: unless-stopped
+    env_file: .env
     depends_on:
       - db
-  caddy:
-    image: caddy:2
+    # Expose backend on port 80 of the server (HTTP)
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - backend
+      - "80:8000"
+
 volumes:
   db_data:
-  caddy_data:
-  caddy_config:

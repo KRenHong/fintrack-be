@@ -1,4 +1,0 @@
-api.yourapp.com {
-  encode gzip
-  reverse_proxy backend:8000
-}
