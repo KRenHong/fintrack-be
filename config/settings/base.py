@@ -51,10 +51,13 @@ INSTALLED_APPS = [
     "django_filters",
     "corsheaders",
     "djoser",
+    "django_extensions",
 
     # Local apps
     "accounts",
     "transactions",
+    "categories",
+    "budgets",
 ]
 
 # ---------------------------------------------------------

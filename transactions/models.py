@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from categories.models import Category
 
 
 class Transaction(models.Model):
@@ -8,6 +9,7 @@ class Transaction(models.Model):
 
 
   user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.PROTECT)
   kind = models.CharField(max_length=2, choices=KIND_CHOICES, default=EX)
   amount = models.DecimalField(max_digits=12, decimal_places=2)
   occurred_on = models.DateField()
