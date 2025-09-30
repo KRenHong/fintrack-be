@@ -20,6 +20,7 @@ services:
     # Expose backend on port 80 of the server (HTTP)
     ports:
       - "80:8000"
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
 
 volumes:
   db_data:
